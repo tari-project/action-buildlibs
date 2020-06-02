@@ -31,14 +31,15 @@ cp "${SRC_DIR}/base_layer/wallet_ffi/wallet.h" /tmp/output
 cd /tmp/output
 sha256sum wallet.h >> "${hashfile}"
 for i in ${arch_arr[@]}; do
+  PLATFORM_ABI=${i}
   get_arch ${i}
   # Tarball the required libraries
   filename=libwallet-${ARCH}-${VERSION}.tar.gz
   echo "Packaging ${i} to ${filename}"
   # Copy newly compiled libraries to staging area
   mkdir -p "/tmp/output/${ARCH}/"
-  cp "/platforms/${i}/lib/libsqlite3.a" "/tmp/output/${ARCH}/"
-  cp "/build/${ARCH}/release/libtari_wallet_ffi.a" "/tmp/output/${ARCH}/"
+  cp "/platforms/sqlite/${i}/lib/libsqlite3.a" "/tmp/output/${ARCH}/"
+  cp "/build/${PLATFORM_ABI}/release/libtari_wallet_ffi.a" "/tmp/output/${ARCH}/"
   tar -czf "/output/${filename}" -C "/tmp/output/" wallet.h $ARCH
   echo sha256sum "./${ARCH}/* -> ${hashfile}"
   sha256sum ./${ARCH}/* >> "${hashfile}"
