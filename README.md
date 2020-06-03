@@ -71,6 +71,8 @@ $ cd tari
 Assuming you're at the root of the Tari source folder (`~/src/tari` in this example), and you want to tarballs placed  
 in `{target-dir}`, you can run:
 
-`docker run -v ${PWD}:/src/ -v {target-dir}:/home/github quay.io/tarilabs/build-libwallet:latest`
+```
+docker run -v ${PWD}:/github/workspace -v /tmp/jniLibs:/github/home -e SRC_DIR=/github/workspace quay.io/tarilabs/build-libwallet
+```
 
 It takes 45 min to an hour to build libraries for the four default android platforms.

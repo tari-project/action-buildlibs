@@ -12,6 +12,8 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.platforms }}
-    - ${{ inputs.level }}
+  env:
+    PLATFORMS: '${{ inputs.platforms }}'
+    LEVEL: '${{ inputs.level }}'
+    SRC_DIR: '/github/workspace'
+    VERSION: '$GITHUB_REF'
