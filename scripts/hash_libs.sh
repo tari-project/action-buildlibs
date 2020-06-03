@@ -19,12 +19,13 @@ function get_arch() {
   fi
 }
 
-mkdir /output
+export OUTDIR=/home/github
+mkdir -p $OUTDIR
 mkdir -p /tmp/output
 IFS=';' read -ra arch_arr <<< "$PLATFORMS"
 
 # Create the hash file
-hashfile=/output/libwallet-hashes-${VERSION}.txt
+hashfile=${OUTDIR}/libwallet-hashes-${VERSION}.txt
 echo "# Mobile libraries for Tari libwallet version ${VERSION}. ${DATE}" > ${hashfile}
 # Copy wallet.h to staging area
 cp "${SRC_DIR}/base_layer/wallet_ffi/wallet.h" /tmp/output
@@ -40,7 +41,7 @@ for i in ${arch_arr[@]}; do
   mkdir -p "/tmp/output/${ARCH}/"
   cp "/platforms/sqlite/${i}/lib/libsqlite3.a" "/tmp/output/${ARCH}/"
   cp "/build/${PLATFORM_ABI}/release/libtari_wallet_ffi.a" "/tmp/output/${ARCH}/"
-  tar -czf "/output/${filename}" -C "/tmp/output/" wallet.h $ARCH
+  tar -czf "${OUTDIR}/${filename}" -C "/tmp/output/" wallet.h $ARCH
   echo sha256sum "./${ARCH}/* -> ${hashfile}"
   sha256sum ./${ARCH}/* >> "${hashfile}"
 done

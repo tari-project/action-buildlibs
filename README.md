@@ -1,7 +1,76 @@
 # action-buildlibs
 
-To build the FFI libraries:
+Build the Tari FFI libraries as part of a github action
 
-Assuming you're at the root of the Tari source folder, and you want to tarballs placed in `{target-dir}`, you can run:
+## Using the github action
 
-`docker run -v ${PWD}:/src/ -v {target-dir}:/tmp/output quay.io/tarilabs/build-libwallet:latest`
+### Inputs
+
+####  platforms
+
+**Optional.** An array of platforms for which to build libwallet. Separate multiple platforms by a semicolon
+
+If omitted, libraries are built for the following architectures by default:
+
+* x86_64-linux-android (x64 Android emulators)
+* aarch64-linux-android (64 bit ARM chips; most modern phones)
+* i686-linux-android (32-bit emulators)
+* armv7-linux-androideabi (32-bit ARM chips, found on older devices)
+
+#### level
+
+**Optional.** `level` specifies the minimum android version to target.The default is '24'.
+
+### Example usage
+
+```yml
+name: Build libwallet
+
+# Build a new set of libraries when a new tag containing 'libwallet' is pushed
+on:
+  push:
+    tags:
+      - "libwallet-*"
+jobs:
+  build_libs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: tari-project/action-buildlibs@v0.0.1
+        with:
+          platforms: "x86_64-linux-android;aarch64-linux-android"
+          level: "24"
+      - name: Create Release
+          id: create_release
+          uses: actions/create-release@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            tag_name: ${{ github.ref }}
+            release_name: Release ${{ github.ref }}
+            draft: false
+            prerelease: true
+```
+
+## Using the Dockerfile as a standalone builder
+
+You can use the `Dockerfile` in this repo to as a build engine to build the FFI libraries locally.
+
+First pull the Docker image:
+
+`docker pull quay.io/tarilabs/build-libwallet`
+
+Then checkout the Tari base node source code
+
+```
+$ cd src  
+$ git checkout git@github.com:tari-project/tari.git
+$ cd tari
+```
+
+Assuming you're at the root of the Tari source folder (`~/src/tari` in this example), and you want to tarballs placed  
+in `{target-dir}`, you can run:
+
+`docker run -v ${PWD}:/src/ -v {target-dir}:/home/github quay.io/tarilabs/build-libwallet:latest`
+
+It takes 45 min to an hour to build libraries for the four default android platforms.

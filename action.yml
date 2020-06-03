@@ -4,7 +4,7 @@ inputs:
   platforms:
     description: 'An array of platforms for which to build libwallet. Separate multiple platforms by spaces.'
     required: false
-    default: 'aarch64-linux-android'
+    default: 'x86_64-linux-android;aarch64-linux-android;i686-linux-android;armv7-linux-androideabi'
   level:
     description: 'The android SDK level to use'
     required: false
