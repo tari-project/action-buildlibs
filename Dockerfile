@@ -17,4 +17,4 @@ ENV CARGO_FLAGS "--package tari_wallet_ffi --lib --release"
 ENV PLATFORMS "x86_64-linux-android;aarch64-linux-android;armv7-linux-androideabi;i686-linux-android"
 ENV VERSION "latest"
 
-ENTRYPOINT ./scripts/entrypoint.sh "${PLATFORMS}" "${LEVEL}" "${SRC_DIR}" "${VERSION}"
+ENTRYPOINT /scripts/entrypoint.sh ${PLATFORMS} ${LEVEL} ${SRC_DIR} ${VERSION}

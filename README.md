@@ -72,7 +72,7 @@ Assuming you're at the root of the Tari source folder (`~/src/tari` in this exam
 in `{target-dir}`, you can run:
 
 ```
-docker run -v ${PWD}:/github/workspace -v /tmp/jniLibs:/github/home -e SRC_DIR=/github/workspace quay.io/tarilabs/build-libwallet
+docker run -v ${PWD}:/github/workspace -v /tmp/jniLibs:/github/home -e SRC_DIR=/github/workspace -e VERSION="0.x.y" -e PLATFORMS="platform1;platform2" -e LEVEL=45 quay.io/tarilabs/build-libwallet
 ```
 
 It takes 45 min to an hour to build libraries for the four default android platforms.

@@ -4,6 +4,12 @@ LEVEL=$2
 SRCDIR=$3
 VERSION=$4
 
+echo "Action Build Libs: Invoking with"
+echo "PLATFORMS: ${PLATFORMS}"
+echo "LEVEL: ${LEVEL}"
+echo "SRCDIR: ${SRCDIR}"
+echo "VERSION: ${VERSION}"
+
 IFS=';' read -ra PLATFORMARRAY <<< "$PLATFORMS"
 
 for platform in "${PLATFORMARRAY[@]}"; do

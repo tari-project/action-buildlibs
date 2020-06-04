@@ -16,4 +16,4 @@ runs:
     PLATFORMS: '${{ inputs.platforms }}'
     LEVEL: '${{ inputs.level }}'
     SRC_DIR: '/github/workspace'
-    VERSION: '$GITHUB_REF'
+    VERSION: ${{ env.github_ref }}
