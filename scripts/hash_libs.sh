@@ -19,7 +19,7 @@ function get_arch() {
   fi
 }
 
-export OUTDIR=/github/home
+export OUTDIR=/github/workspace/libwallet
 mkdir -p $OUTDIR
 mkdir -p /tmp/output
 IFS=';' read -ra arch_arr <<< "$PLATFORMS"
