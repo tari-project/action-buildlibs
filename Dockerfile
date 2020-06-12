@@ -1,6 +1,6 @@
 # Custom dockerfile to build Tari libwallet for android
 FROM quay.io/tarilabs/sqlite-mobile:201911192122 as sqlite
-FROM quay.io/tarilabs/rust-ndk:1.43.0_r21b
+FROM quay.io/tarilabs/rust-ndk:1.46.0_r21b
 # Copy the precompiled sqlite binaries
 COPY --from=sqlite /platforms /platforms
 ADD ./scripts ./scripts/
