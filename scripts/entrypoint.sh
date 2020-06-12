@@ -14,7 +14,7 @@ echo "VERSION: ${VERSION}"
 IFS=';' read -ra PLATFORMARRAY <<< "$PLATFORMS"
 
 for platform in "${PLATFORMARRAY[@]}"; do
-  /scripts/build_jnilib.sh ${platform} ${LEVEL} ${SRCDIR}
+  /scripts/build_jnilib.sh ${platform} ${LEVEL} ${SRCDIR} || exit 1
 done
 
 /scripts/hash_libs.sh "$PLATFORMS" "$VERSION" "${SRCDIR}"
