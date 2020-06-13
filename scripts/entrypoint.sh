@@ -3,7 +3,7 @@ PLATFORMS=$1
 LEVEL=$2
 SRCDIR=$3
 VERSION=$4
-VERSION=${VERSION/refs\/tags\//}
+VERSION=${VERSION/refs\/tags\/libwallet-/}
 
 echo "Action Build Libs: Invoking with"
 echo "PLATFORMS: ${PLATFORMS}"
