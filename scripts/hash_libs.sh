@@ -40,6 +40,8 @@ for i in ${arch_arr[@]}; do
   # Copy newly compiled libraries to staging area
   mkdir -p "/tmp/output/${ARCH}/"
   cp "/platforms/sqlite/${i}/lib/libsqlite3.a" "/tmp/output/${ARCH}/"
+  cp "/platforms/ssl/${i}/usr/local/lib/libcrypto.a" "/tmp/output/${ARCH}/"
+  cp "/platforms/ssl/${i}/usr/local/lib/libssl.a" "/tmp/output/${ARCH}/"
   cp "/build/${PLATFORM_ABI}/release/libtari_wallet_ffi.a" "/tmp/output/${ARCH}/"
   tar -czf "${OUTDIR}/${filename}" -C "/tmp/output/" wallet.h $ARCH
   echo sha256sum "./${ARCH}/* -> ${hashfile}"

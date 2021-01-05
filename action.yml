@@ -2,9 +2,9 @@ name: 'Tari jniLibs'
 description: 'Builds Tari android JNI libraries from source'
 inputs:
   platforms:
-    description: 'An array of platforms for which to build libwallet. Separate multiple platforms by spaces.'
+    description: 'An array of platforms for which to build libwallet. Separate multiple platforms with a semicolon.'
     required: false
-    default: 'x86_64-linux-android;aarch64-linux-android;i686-linux-android;armv7-linux-androideabi'
+    default: 'x86_64-linux-android;aarch64-linux-android;armv7-linux-androideabi'
   level:
     description: 'The android SDK level to use'
     required: false
